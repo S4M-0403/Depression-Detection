@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A3 Poster – Depression Detection</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Times+New+Roman:wght@400;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Times New Roman', Times, serif; background: #e0e0e0; display: flex; justify-content: center; align-items: flex-start; padding: 20px; min-height: 100vh; }
+  .poster { width: 842px; min-height: 1191px; background: #fff; border: 2px solid #333; display: flex; flex-direction: column; box-shadow: 4px 4px 18px rgba(0,0,0,0.35); }
+  .header { background: #1a3a6b; color: #fff; text-align: center; padding: 10px 14px 8px; border-bottom: 4px solid #c8a000; }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .header-text { flex: 1; text-align: center; }
+  .header-logo { width: 72px; height: 72px; flex-shrink: 0; background: #fff; border-radius: 50%; border: 2px solid #c8a000; display: flex; align-items: center; justify-content: center; color: #1a3a6b; font-weight: bold; font-size: 11px; }
+  .header h1 { font-size: 20px; font-weight: bold; letter-spacing: 0.5px; text-transform: uppercase; line-height: 1.3; margin-bottom: 6px; }
+  .header .authors { font-size: 11.5px; margin-bottom: 3px; }
+  .header .supervisor { font-size: 11px; font-style: italic; margin-bottom: 3px; }
+  .header .dept { font-size: 10.5px; font-weight: bold; margin-top: 4px; letter-spacing: 0.2px; }
+  .body { display: flex; flex: 1; padding: 10px; gap: 10px; }
+  .col { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+  .col-narrow { flex: 0.92; }
+  .section { border: 1px solid #ccc; background: #fafafa; }
+  .section-title { background: #1a3a6b; color: #fff; font-size: 11px; font-weight: bold; text-transform: uppercase; padding: 4px 8px; letter-spacing: 0.4px; }
+  .section-body { padding: 6px 8px; font-size: 9.3px; line-height: 1.5; color: #111; text-align: justify; }
+  .section-body p { margin-bottom: 4px; }
+  .section-body p:last-child { margin-bottom: 0; }
+  b.kw { color: #1a3a6b; }
+  .poster-table { width: 100%; border-collapse: collapse; font-size: 8.5px; margin-top: 4px; }
+  .poster-table th { background: #1a3a6b; color: #fff; padding: 3px 4px; text-align: left; border: 1px solid #aaa; }
+  .poster-table td { padding: 3px 4px; border: 1px solid #ccc; vertical-align: top; }
+  .poster-table tr:nth-child(even) td { background: #eef2fa; }
+  ul.poster-list { margin: 3px 0 3px 14px; font-size: 9.3px; }
+  ul.poster-list li { margin-bottom: 2px; }
+  .flow { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 5px; justify-content: center; }
+  .flow-step { background: #1a3a6b; color: #fff; font-size: 8px; padding: 4px 6px; border-radius: 3px; text-align: center; min-width: 72px; position: relative; }
+  .flow-step::after { content: '▶'; position: absolute; right: -10px; top: 50%; transform: translateY(-50%); font-size: 8px; color: #1a3a6b; }
+  .flow-step:last-child::after { content: ''; }
+  .outcome-row { display: flex; gap: 5px; margin-top: 4px; }
+  .outcome-box { flex: 1; border: 1px solid #1a3a6b; border-top: 3px solid #c8a000; padding: 4px 6px; font-size: 8.5px; text-align: center; background: #f0f4ff; }
+  .outcome-box .ob-title { font-weight: bold; font-size: 8px; color: #1a3a6b; margin-bottom: 2px; }
+  .references { border-top: 3px solid #1a3a6b; padding: 6px 10px; font-size: 8.2px; color: #222; background: #f5f5f5; }
+  .references .ref-title { font-weight: bold; font-size: 9px; text-transform: uppercase; margin-bottom: 3px; color: #1a3a6b; }
+  .ref-list { columns: 2; column-gap: 14px; }
+  .ref-list p { margin-bottom: 2px; break-inside: avoid; }
+  .divider { border-top: 1px dashed #aaa; margin: 4px 0; }
+
+  /* PRINT: zero margins (browser default ~0.5in removed). Paper: A3 matches design; for US Letter use size: letter portrait */
+  @page {
+    margin: 0;
+    size: A3 portrait;
+  }
+
+  @media print {
+    html,
+    body {
+      margin: 0 !important;
+      padding: 0 !important;
+      background: #fff !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    body {
+      display: block;
+      min-height: 0;
+    }
+
+    .poster {
+      width: 297mm;
+      min-height: 420mm;
+      margin: 0;
+      border: none !important;
+      box-shadow: none !important;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="header">
+    <div class="header-inner">
+      <div class="header-logo">JIIT</div>
+      <div class="header-text">
+        <h1>Depression Detection</h1>
+        <div class="authors"><b>Rishita Singh (9922102094) · Shinthil Singh (9922103021) · Shikhar Maheshwari (9922103029)</b></div>
+        <div class="supervisor">Name of Supervisor – Dr. Devpriya Soni | April 2026</div>
+        <div class="dept">Department of Computer Science Engineering &amp; Information Technology | Jaypee Institute of Information Technology, Noida</div>
+      </div>
+      <div class="header-logo">2026</div>
+    </div>
+  </div>
+  <div class="body">
+    <div class="col">
+      <div class="section">
+        <div class="section-title">Introduction</div>
+        <div class="section-body">
+          <p>Depression and related mental health disorders are major global health issues that affect people across age groups and social backgrounds. Conventional diagnostic pathways mostly depend on clinical interviews and self-reported assessments, which are often subjective, time-consuming, and difficult to scale for large populations.</p>
+          <p>With rising social media usage, users frequently express emotional states, isolation, hopelessness, and distress in textual form. Platforms such as Reddit contain large volumes of posts discussing anxiety, depression, and suicidal ideation. This creates an opportunity for <b class="kw">automated early-risk detection</b> using natural language processing.</p>
+          <p>Recent advances in AI allow us to transform raw text into contextual vectors and classify risk patterns with higher consistency. The proposed work combines <b class="kw">MiniLM embeddings</b>, <b class="kw">classical machine learning</b>, and <b class="kw">LLM-based zero/few-shot prompting</b> in a unified comparative framework for scalable, assistive mental health screening.</p>
+          <p>Unlike isolated model studies, this project emphasizes reproducible end-to-end experimentation, cross-domain generalization checks, and error analysis to better understand strengths, weaknesses, and practical deployment boundaries.</p>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">Problem Definition &amp; Objectives</div>
+        <div class="section-body">
+          <p>The major challenge is to accurately identify mental health risk from unstructured social media text where language is noisy, informal, and context dependent. Distress can be expressed implicitly through metaphors, fragmented writing, or indirect cues, making simple keyword and sentiment systems unreliable.</p>
+          <p>Another core challenge is building a complete and consistent pipeline from preprocessing to evaluation. Classical models may face transfer issues across datasets, while LLM methods can be unstable due to prompt sensitivity and interpretability limitations.</p>
+          <div class="divider"></div>
+          <p><b>Primary Objectives:</b></p>
+          <ul class="poster-list">
+            <li>Design an end-to-end framework for automated depression-risk detection from Reddit text</li>
+            <li>Develop robust text preprocessing that removes noise while preserving risk-relevant cues</li>
+            <li>Use MiniLM sentence embeddings for context-rich semantic representation</li>
+            <li>Train and compare Logistic Regression, SVM, and MLP as strong supervised baselines</li>
+            <li>Evaluate prompt-based zero-shot and few-shot LLM methods under consistent conditions</li>
+            <li>Measure performance using accuracy, precision, recall, weighted F1, and confusion matrices</li>
+            <li>Analyze cross-domain transfer (Reddit ↔ DAIC) and detailed error categories</li>
+            <li>Support ethical assistive screening with human-in-the-loop interpretation</li>
+          </ul>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">Utility, Ethics &amp; Social Relevance</div>
+        <div class="section-body">
+          <p>The framework supports <b>early assistive screening</b> by helping moderators, counsellors, and wellness teams prioritize posts that may require urgent review. It does not replace diagnosis; instead, it acts as a triage signal to improve response timeliness.</p>
+          <p>From a practical standpoint, MiniLM plus classical models offers efficient CPU-based execution suitable for academic labs and resource-constrained environments. This lowers infrastructure cost while preserving meaningful performance.</p>
+          <p>Ethically, the system emphasizes cautious interpretation, high-risk recall awareness, and expert oversight before any intervention. It can contribute to scalable digital mental health monitoring while balancing automation with responsibility.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="section">
+        <div class="section-title">Methodology</div>
+        <div class="section-body">
+          <p>The system follows a structured modular pipeline where each stage has a specific role, enabling fair comparison between trained models and prompt-based approaches:</p>
+          <div class="flow">
+            <div class="flow-step">Reddit Data<br>Collection</div>
+            <div class="flow-step">Text<br>Preprocessing</div>
+            <div class="flow-step">MiniLM<br>Embeddings</div>
+            <div class="flow-step">ML Model<br>Training</div>
+            <div class="flow-step">Zero/Few-shot<br>LLM Inference</div>
+            <div class="flow-step">Metrics +<br>Error Analysis</div>
+            <div class="flow-step">Cross-domain<br>Evaluation</div>
+          </div>
+          <div class="divider"></div>
+          <p><b>Preprocessing:</b> URL removal, special-character filtering, normalization, duplicate/empty-post handling, and quality control while preserving psychologically meaningful cues.</p>
+          <p><b>Feature Extraction:</b> all-MiniLM-L6-v2 converts each post into dense contextual vectors that better capture semantic similarity than surface-level word counts.</p>
+          <p><b>Classical Modelling:</b> Logistic Regression, SVM, and MLP are trained on shared embeddings to maintain consistency across model comparisons.</p>
+          <p><b>LLM Evaluation:</b> zero-shot and few-shot prompts are applied to compare training-free inference with supervised baselines and study prompt sensitivity.</p>
+          <p><b>Evaluation:</b> accuracy, precision, recall, weighted F1, confusion matrices, and cross-domain transfer metrics are used for robust analysis.</p>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">System Design Considerations</div>
+        <div class="section-body">
+          <ul class="poster-list">
+            <li><b>Reliability:</b> stratified cross-validation and transfer experiments to verify model stability</li>
+            <li><b>Interpretability:</b> structured error categories and comparison of ML vs LLM decision behavior</li>
+            <li><b>Efficiency:</b> MiniLM embedding reuse and lightweight classifiers for low-cost execution</li>
+            <li><b>Scalability:</b> modular architecture supporting new datasets, prompts, and model modules</li>
+            <li><b>Safety:</b> high-risk predictions treated as assistive alerts with human review requirements</li>
+            <li><b>Ethics:</b> emphasis on responsible use, non-diagnostic output framing, and caution on bias</li>
+            <li><b>Reproducibility:</b> stage-wise notebook documentation of preprocessing, modeling, and metrics</li>
+          </ul>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">Implementation Overview</div>
+        <div class="section-body">
+          <p>The implementation was carried out in Python/Jupyter using stage-wise notebooks for data preparation, embedding generation, classical model training, LLM setup, prompt engineering, and error analysis.</p>
+          <p><b>Technology Stack:</b> Python, Pandas, NumPy, Scikit-learn, Sentence Transformers, Transformers, Matplotlib, Seaborn.</p>
+          <p>The selected setup provides a practical balance between semantic performance, computational feasibility, and repeatable experimentation on standard CPU hardware.</p>
+          <table class="poster-table">
+            <tr><th>Module</th><th>Purpose</th><th>Output</th></tr>
+            <tr><td>Preprocess</td><td>Clean and normalize text</td><td>Filtered corpus</td></tr>
+            <tr><td>Embedding</td><td>MiniLM vectorization</td><td>Sentence vectors</td></tr>
+            <tr><td>Classical ML</td><td>LR, SVM, MLP training</td><td>Risk predictions</td></tr>
+            <tr><td>LLM Prompts</td><td>Zero/few-shot inference</td><td>Prompt-based labels</td></tr>
+            <tr><td>Evaluation</td><td>Metrics + analysis</td><td>Comparative insights</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col col-narrow">
+      <div class="section">
+        <div class="section-title">Results &amp; Analysis</div>
+        <div class="section-body">
+          <p>The system was evaluated across model performance, cross-domain transfer, and prompt sensitivity. Results show that embedding-based classical models achieved stronger and more stable outcomes than training-free prompting alone.</p>
+          <p><b>SVM</b> achieved the best overall supervised performance (~79% accuracy, ~0.79 weighted F1), while Logistic Regression provided a consistent baseline and MLP offered competitive non-linear modeling behavior.</p>
+          <p>LLM zero-shot/few-shot methods demonstrated useful low-data potential but remained prompt-sensitive and less stable, especially in high-risk edge cases where false negatives are critical.</p>
+          <table class="poster-table">
+            <tr><th>Model</th><th>Accuracy</th><th>Weighted F1</th><th>Observation</th></tr>
+            <tr><td>Logistic Regression</td><td>~76%</td><td>~0.75</td><td>Reliable baseline</td></tr>
+            <tr><td>MLP</td><td>~77%</td><td>~0.76</td><td>Better non-linear capture</td></tr>
+            <tr><td>SVM</td><td>~79%</td><td>~0.79</td><td>Best performer</td></tr>
+            <tr><td>LLM Zero-shot</td><td>~56-70%</td><td>~0.55-0.70</td><td>Prompt sensitive</td></tr>
+          </table>
+          <p>Cross-domain tests confirmed transfer difficulty and domain shift effects. Prompt sensitivity analysis showed large variation across templates, reinforcing that prompt engineering is a critical determinant for LLM reliability in this task.</p>
+          <table class="poster-table">
+            <tr><th>Transfer Direction</th><th>LR</th><th>MLP</th><th>SVM</th></tr>
+            <tr><td>DAIC → Reddit</td><td>0.50</td><td>0.50</td><td>0.33</td></tr>
+            <tr><td>Reddit → DAIC</td><td>0.56</td><td>0.58</td><td>0.57</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">Comparison with Existing Solutions</div>
+        <div class="section-body">
+          <table class="poster-table">
+            <tr><th>Approach</th><th>Strength</th><th>Limitation</th><th>Our Improvement</th></tr>
+            <tr><td>Keyword/Sentiment</td><td>Simple</td><td>Low contextual depth</td><td>Semantic embeddings</td></tr>
+            <tr><td>TF-IDF + Classical ML</td><td>Fast</td><td>Weak semantics</td><td>MiniLM vectors</td></tr>
+            <tr><td>Deep Transformer Fine-tuning</td><td>High context</td><td>High compute cost</td><td>CPU-efficient hybrid setup</td></tr>
+            <tr><td>LLM-only</td><td>No training needed</td><td>Prompt instability</td><td>Unified ML + LLM evaluation</td></tr>
+          </table>
+          <p>The proposed framework addresses key literature gaps by integrating supervised and prompt-based paradigms in one consistent pipeline, with shared preprocessing, shared embeddings, transfer testing, and error-distribution analysis.</p>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">Conclusion</div>
+        <div class="section-body">
+          <p>This project successfully delivers a unified and reproducible framework for text-based depression risk detection by combining MiniLM embeddings, classical supervised models, and LLM prompting strategies within one comparative system.</p>
+          <p>Findings show that supervised embedding-based models currently provide stronger consistency and accuracy, while LLMs offer flexible low-data inference but require careful prompt design and safety-aware interpretation.</p>
+          <div class="outcome-row">
+            <div class="outcome-box"><div class="ob-title">Best Classifier</div>SVM achieved highest weighted F1 in core evaluation</div>
+            <div class="outcome-box"><div class="ob-title">Practical Utility</div>Assistive risk triage support for human reviewers</div>
+            <div class="outcome-box"><div class="ob-title">Research Value</div>Unified comparison of supervised and prompt-based NLP</div>
+          </div>
+          <div class="divider"></div>
+          <p><b>Future Work:</b> domain adaptation for robust transfer, multimodal fusion (text + audio/behavior), improved confidence calibration, enhanced explainability, and responsible real-time monitoring dashboards with strict ethical safeguards.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="references">
+    <div class="ref-title">References</div>
+    <div class="ref-list">
+      <p>[1] Coppersmith, G., Dredze, M., &amp; Harman, C. (2014). Quantifying mental health signals in Twitter.</p>
+      <p>[2] De Choudhury, M., Counts, S., &amp; Horvitz, E. (2013). Predicting depression via social media.</p>
+      <p>[3] Reimers, N., &amp; Gurevych, I. (2019). Sentence-BERT for sentence embeddings.</p>
+      <p>[4] Devlin, J. et al. (2019). BERT: Pre-training of deep bidirectional transformers.</p>
+      <p>[5] Brown, T. et al. (2020). Language models are few-shot learners.</p>
+      <p>[6] Lewis, M. et al. (2020). BART: Denoising sequence-to-sequence pre-training.</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>
